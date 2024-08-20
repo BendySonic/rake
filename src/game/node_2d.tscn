@@ -1,0 +1,131 @@
+[gd_scene load_steps=15 format=3 uid="uid://b4lklevqsj0vk"]
+
+[ext_resource type="Texture2D" uid="uid://bhyfjkh3iine7" path="res://icon.svg" id="1_6ttba"]
+[ext_resource type="PackedScene" uid="uid://d0ruxxa8ys1wg" path="res://src/game/player.tscn" id="1_qium4"]
+[ext_resource type="Texture2D" uid="uid://wdcgqnbm8dkr" path="res://res/sky.png" id="1_rbnel"]
+[ext_resource type="Texture2D" uid="uid://bjqglmrcpfj7y" path="res://res/background.png" id="2_rayia"]
+[ext_resource type="Texture2D" uid="uid://baec58q61cvj8" path="res://res/mountains.png" id="3_5akix"]
+[ext_resource type="Texture2D" uid="uid://cmvmdhhjf3va6" path="res://res/wire.png" id="4_58j2b"]
+[ext_resource type="Texture2D" uid="uid://btv342yowy1gw" path="res://res/background_snow.png" id="5_vymyd"]
+[ext_resource type="Texture2D" uid="uid://2mrv5ajusv0t" path="res://res/middle_snow.png" id="6_2d1qf"]
+[ext_resource type="Texture2D" uid="uid://bygl3dgvfwl86" path="res://res/trees.png" id="6_a0qij"]
+[ext_resource type="Texture2D" uid="uid://dj1sbdkm8q145" path="res://res/main_snow.png" id="7_qjuxg"]
+[ext_resource type="Texture2D" uid="uid://b2e64fm3vs0fq" path="res://res/shadow.png" id="8_upkra"]
+[ext_resource type="Texture2D" uid="uid://c4fxeh2sskrhi" path="res://res/base_cabin.png" id="9_818pv"]
+[ext_resource type="Texture2D" uid="uid://bcjtrbk7px6q2" path="res://res/foreground_snow.png" id="10_i3x10"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0ays"]
+size = Vector2(1200, 128)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.05, 0)
+scroll_offset = Vector2(-363, -34)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture = ExtResource("1_rbnel")
+centered = false
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0)
+scroll_offset = Vector2(877, 172)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
+texture = ExtResource("2_rayia")
+centered = false
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 0)
+scroll_offset = Vector2(-217, -64)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D3"]
+texture = ExtResource("3_5akix")
+centered = false
+
+[node name="Parallax2D4" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0)
+scroll_offset = Vector2(567, 274)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D4"]
+position = Vector2(-138, -98)
+texture = ExtResource("4_58j2b")
+centered = false
+
+[node name="Parallax2D5" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0)
+scroll_offset = Vector2(-362, 347)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D5"]
+texture = ExtResource("5_vymyd")
+centered = false
+
+[node name="Parallax2D9" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.8, 0)
+scroll_offset = Vector2(-6, 6)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D9"]
+texture = ExtResource("6_a0qij")
+centered = false
+
+[node name="Parallax2D6" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1, 0)
+scroll_offset = Vector2(-282, 474)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D6"]
+texture = ExtResource("6_2d1qf")
+centered = false
+
+[node name="Parallax2D7" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1, 0)
+scroll_offset = Vector2(-2301, 641)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D7"]
+position = Vector2(15, -5)
+texture = ExtResource("7_qjuxg")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D7"]
+position = Vector2(15, -5)
+texture = ExtResource("8_upkra")
+centered = false
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D7"]
+position = Vector2(3297, -368)
+texture = ExtResource("9_818pv")
+centered = false
+
+[node name="Parallax2D8" type="Parallax2D" parent="."]
+scroll_scale = Vector2(2, 0)
+scroll_offset = Vector2(-1327, 904)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D8"]
+position = Vector2(15, -5)
+texture = ExtResource("10_i3x10")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(370, 530)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_c0ays")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0.500023, -0.999997)
+scale = Vector2(10, 1)
+texture = ExtResource("1_6ttba")
+
+[node name="Player" parent="." instance=ExtResource("1_qium4")]
+visible = false
+position = Vector2(334, 444)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

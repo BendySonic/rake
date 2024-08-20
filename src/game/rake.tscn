@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf7k61ex5ya3s"]
+
+[ext_resource type="Texture2D" uid="uid://bhyfjkh3iine7" path="res://icon.svg" id="2_2jc6j"]
+[ext_resource type="Script" path="res://src/game/rake.gd" id="3_hnrby"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xedwu"]
+size = Vector2(25, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdsj7"]
+size = Vector2(650, 200)
+
+[node name="Rake" type="CharacterBody2D"]
+script = ExtResource("3_hnrby")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.627539, 0.632782, 1)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_2jc6j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xedwu")
+
+[node name="SeeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeeArea"]
+position = Vector2(0, -75)
+shape = SubResource("RectangleShape2D_kdsj7")
+
+[connection signal="body_entered" from="SeeArea" to="." method="_on_see_area_body_entered"]
+[connection signal="body_exited" from="SeeArea" to="." method="_on_see_area_body_exited"]
