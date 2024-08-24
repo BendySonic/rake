@@ -1,26 +1,42 @@
 class_name Player
 extends CharacterBody2D
 
+signal started_run
+signal ended_run
 
-const SPEED = 300.0
+const NORMAL_SPEED = 250.0
+const RUN_SPEED = 350.0
 const JUMP_VELOCITY = -400.0
+
+@export var night: Node2D
+
+var speed = 225.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+var is_run := false
 
 
 func _physics_process(delta: float) -> void:
 	move(delta)
 
 func move(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-	
-	var direction = Input.get_axis("left", "right")
+	# Move
+	var direction = Input.get_vector("left", "right", "forward", "back")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		velocity = velocity.move_toward(Vector2(0, 0), speed)
+	# Run
+	if Input.is_action_just_pressed("run"):
+		is_run = true
+		speed = RUN_SPEED
+		started_run.emit()
+	elif Input.is_action_just_released("run"):
+		is_run = false
+		speed = NORMAL_SPEED
+		ended_run.emit()
+	
 	move_and_slide()
+
+func set_night_mode():
+	night.show()

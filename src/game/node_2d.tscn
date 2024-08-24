@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4lklevqsj0vk"]
+[gd_scene load_steps=25 format=3 uid="uid://b4lklevqsj0vk"]
 
-[ext_resource type="Texture2D" uid="uid://bhyfjkh3iine7" path="res://icon.svg" id="1_6ttba"]
+[ext_resource type="Script" path="res://src/game/node_2d.gd" id="1_2w2eo"]
 [ext_resource type="PackedScene" uid="uid://d0ruxxa8ys1wg" path="res://src/game/player.tscn" id="1_qium4"]
 [ext_resource type="Texture2D" uid="uid://wdcgqnbm8dkr" path="res://res/sky.png" id="1_rbnel"]
+[ext_resource type="Texture2D" uid="uid://doproabm720lb" path="res://res/night_sky.png" id="2_1y1ty"]
 [ext_resource type="Texture2D" uid="uid://bjqglmrcpfj7y" path="res://res/background.png" id="2_rayia"]
 [ext_resource type="Texture2D" uid="uid://baec58q61cvj8" path="res://res/mountains.png" id="3_5akix"]
 [ext_resource type="Texture2D" uid="uid://cmvmdhhjf3va6" path="res://res/wire.png" id="4_58j2b"]
@@ -13,117 +14,234 @@
 [ext_resource type="Texture2D" uid="uid://b2e64fm3vs0fq" path="res://res/shadow.png" id="8_upkra"]
 [ext_resource type="Texture2D" uid="uid://c4fxeh2sskrhi" path="res://res/base_cabin.png" id="9_818pv"]
 [ext_resource type="Texture2D" uid="uid://bcjtrbk7px6q2" path="res://res/foreground_snow.png" id="10_i3x10"]
+[ext_resource type="Shader" path="res://addons/GodotRetro/Screen Shaders/LensDistortion.gdshader" id="14_1121j"]
+[ext_resource type="Texture2D" uid="uid://bffw3tolf483m" path="res://res/camera_hud.png" id="15_kk6iy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c0ays"]
-size = Vector2(1200, 128)
+size = Vector2(6000, 128)
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvp6n"]
+size = Vector2(220, 128)
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8b7v6"]
+size = Vector2(40, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_noy6x"]
+size = Vector2(40, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6dkk"]
+size = Vector2(230, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cyitr"]
+size = Vector2(170, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5oxxa"]
+size = Vector2(60, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gevq"]
+shader = ExtResource("14_1121j")
+shader_parameter/strength = 0.015
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "camera", "background", "mountains", "wires", "background_snow")]
+script = ExtResource("1_2w2eo")
+player = NodePath("Objects/Player")
+camera = NodePath("Objects/Camera2D")
+background = NodePath("Parallax/Background")
+mountains = NodePath("Parallax/Mountains")
+wires = NodePath("Parallax/Wires")
+background_snow = NodePath("Parallax/BackgroundSnow")
+night_mode = true
+
+[node name="Parallax" type="Node" parent="."]
+
+[node name="NightSky" type="Parallax2D" parent="Parallax"]
 scroll_scale = Vector2(0.05, 0)
 scroll_offset = Vector2(-363, -34)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/NightSky"]
+texture = ExtResource("2_1y1ty")
+centered = false
+
+[node name="Background" type="Node2D" parent="Parallax"]
+
+[node name="Sky" type="Parallax2D" parent="Parallax/Background"]
+scroll_scale = Vector2(0.05, 0)
+scroll_offset = Vector2(-363, -34)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background/Sky"]
 texture = ExtResource("1_rbnel")
 centered = false
 
-[node name="Parallax2D2" type="Parallax2D" parent="."]
+[node name="Background" type="Parallax2D" parent="Parallax/Background"]
 scroll_scale = Vector2(0.1, 0)
-scroll_offset = Vector2(877, 172)
+scroll_offset = Vector2(-1247, 163)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background/Background"]
 texture = ExtResource("2_rayia")
 centered = false
 
-[node name="Parallax2D3" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.3, 0)
-scroll_offset = Vector2(-217, -64)
+[node name="Mountains" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.2, 0)
+scroll_offset = Vector2(-385, -39)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D3"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Mountains"]
 texture = ExtResource("3_5akix")
 centered = false
 
-[node name="Parallax2D4" type="Parallax2D" parent="."]
+[node name="Wires" type="Parallax2D" parent="Parallax"]
 scroll_scale = Vector2(0.5, 0)
-scroll_offset = Vector2(567, 274)
+scroll_offset = Vector2(253, 274)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D4"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Wires"]
 position = Vector2(-138, -98)
 texture = ExtResource("4_58j2b")
 centered = false
 
-[node name="Parallax2D5" type="Parallax2D" parent="."]
+[node name="BackgroundSnow" type="Parallax2D" parent="Parallax"]
 scroll_scale = Vector2(0.6, 0)
-scroll_offset = Vector2(-362, 347)
+scroll_offset = Vector2(-2556, 347)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D5"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/BackgroundSnow"]
 texture = ExtResource("5_vymyd")
 centered = false
 
-[node name="Parallax2D9" type="Parallax2D" parent="."]
+[node name="Trees" type="Parallax2D" parent="Parallax"]
 scroll_scale = Vector2(0.8, 0)
-scroll_offset = Vector2(-6, 6)
+scroll_offset = Vector2(-510, 6)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D9"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Trees"]
 texture = ExtResource("6_a0qij")
 centered = false
 
-[node name="Parallax2D6" type="Parallax2D" parent="."]
+[node name="MiddleSnow" type="Parallax2D" parent="Parallax"]
 scroll_scale = Vector2(1, 0)
-scroll_offset = Vector2(-282, 474)
+scroll_offset = Vector2(-2499, 474)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D6"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/MiddleSnow"]
 texture = ExtResource("6_2d1qf")
 centered = false
 
-[node name="Parallax2D7" type="Parallax2D" parent="."]
+[node name="Main" type="Parallax2D" parent="Parallax"]
 scroll_scale = Vector2(1, 0)
 scroll_offset = Vector2(-2301, 641)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D7"]
-position = Vector2(15, -5)
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Main"]
+position = Vector2(42, 0)
 texture = ExtResource("7_qjuxg")
 centered = false
 
-[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D7"]
-position = Vector2(15, -5)
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax/Main"]
+position = Vector2(81, 0)
 texture = ExtResource("8_upkra")
 centered = false
 
-[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D7"]
-position = Vector2(3297, -368)
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax/Main"]
+position = Vector2(1485, -458)
 texture = ExtResource("9_818pv")
 centered = false
 
-[node name="Parallax2D8" type="Parallax2D" parent="."]
-scroll_scale = Vector2(2, 0)
-scroll_offset = Vector2(-1327, 904)
+[node name="ForegroundSnow" type="Parallax2D" parent="Parallax"]
+z_index = 2
+scroll_scale = Vector2(1.5, 0)
+scroll_offset = Vector2(-1983, 904)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D8"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/ForegroundSnow"]
 position = Vector2(15, -5)
 texture = ExtResource("10_i3x10")
 centered = false
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
-position = Vector2(370, 530)
+[node name="Objects" type="Node" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="Obstacles" type="Node2D" parent="Objects"]
+z_index = 3
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Objects/Obstacles"]
+position = Vector2(271, 1120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
 shape = SubResource("RectangleShape2D_c0ays")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(0.500023, -0.999997)
-scale = Vector2(10, 1)
-texture = ExtResource("1_6ttba")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(-3, -438)
+shape = SubResource("RectangleShape2D_c0ays")
 
-[node name="Player" parent="." instance=ExtResource("1_qium4")]
-visible = false
-position = Vector2(334, 444)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(747, -380)
+shape = SubResource("RectangleShape2D_wvp6n")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(1055, -380)
+shape = SubResource("RectangleShape2D_wvp6n")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(1266, -370)
+shape = SubResource("RectangleShape2D_8b7v6")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(831, -289)
+shape = SubResource("RectangleShape2D_noy6x")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(971, -289)
+shape = SubResource("RectangleShape2D_noy6x")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(23, -378)
+shape = SubResource("RectangleShape2D_e6dkk")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(-186, -370)
+shape = SubResource("RectangleShape2D_cyitr")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Objects/Obstacles/StaticBody2D"]
+position = Vector2(-974, -382)
+shape = SubResource("RectangleShape2D_5oxxa")
+
+[node name="Player" parent="Objects" instance=ExtResource("1_qium4")]
+position = Vector2(272, 890)
+
+[node name="Camera2D" type="Camera2D" parent="Objects"]
+position = Vector2(274, 528)
+limit_left = -1000
+limit_right = 2000
+limit_smoothed = true
+position_smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_kk6iy")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Control" type="Control" parent="CanvasLayer2"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="ColorRect" parent="CanvasLayer2/Control"]
+material = SubResource("ShaderMaterial_2gevq")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
