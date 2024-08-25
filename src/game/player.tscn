@@ -24,7 +24,7 @@ shape = SubResource("RectangleShape2D_xedwu")
 visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Night"]
-color = Color(0.0605303, 0.0605304, 0.0605303, 1)
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="Flashnight" type="PointLight2D" parent="Night"]
 position = Vector2(1, -2)

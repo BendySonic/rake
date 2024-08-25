@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf7k61ex5ya3s"]
+[gd_scene load_steps=8 format=3 uid="uid://cf7k61ex5ya3s"]
 
-[ext_resource type="Texture2D" uid="uid://bhyfjkh3iine7" path="res://icon.svg" id="2_2jc6j"]
 [ext_resource type="Script" path="res://src/game/rake.gd" id="3_hnrby"]
+[ext_resource type="Texture2D" uid="uid://bdnf2nuq04sb5" path="res://res/rake.png" id="3_jnoj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xedwu"]
 size = Vector2(25, 50)
@@ -9,13 +9,147 @@ size = Vector2(25, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdsj7"]
 size = Vector2(650, 200)
 
+[sub_resource type="Animation" id="Animation_a6r88"]
+resource_name = "stay"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Body/Arms/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 1),
+"transitions": PackedFloat32Array(0.31864, 1),
+"update": 0,
+"values": [3.06135, 2.46853]
+}
+
+[sub_resource type="Animation" id="Animation_74qkt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Body/Arms/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.06135]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ru3s8"]
+_data = {
+"RESET": SubResource("Animation_74qkt"),
+"stay": SubResource("Animation_a6r88")
+}
+
 [node name="Rake" type="CharacterBody2D"]
 script = ExtResource("3_hnrby")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.627539, 0.632782, 1)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_2jc6j")
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Body" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(46, -131)
+rest = Transform2D(1, 0, 0, 1, 46, -131)
+
+[node name="RightLeg" type="Bone2D" parent="Skeleton2D/Body"]
+position = Vector2(-8, 6)
+rotation = -1.3043
+scale = Vector2(1, 1)
+rest = Transform2D(0.120682, -0.992691, 0.992691, 0.120682, -16, 9)
+auto_calculate_length_and_angle = false
+length = 125.0
+bone_angle = 168.111
+
+[node name="RightLeg" type="Polygon2D" parent="Skeleton2D/Body/RightLeg"]
+position = Vector2(213.017, -438.582)
+rotation = 1.3043
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_jnoj3")
+skeleton = NodePath("../../..")
+polygon = PackedVector2Array(774.953, 565.387, 702.168, 610.878, 696.969, 697.961, 694.369, 826.635, 626.783, 827.935, 592.989, 850.031, 612.485, 913.718, 686.571, 941.012, 738.56, 944.912, 785.351, 895.521, 769.754, 876.025, 800.948, 809.739, 816.545, 705.759, 832.142, 617.377)
+uv = PackedVector2Array(774.953, 565.387, 702.168, 610.878, 696.969, 697.961, 694.369, 826.635, 626.783, 827.935, 592.989, 850.031, 612.485, 913.718, 686.571, 941.012, 738.56, 944.912, 785.351, 895.521, 769.754, 876.025, 800.948, 809.739, 816.545, 705.759, 832.142, 617.377)
+
+[node name="Body" type="Polygon2D" parent="Skeleton2D/Body"]
+position = Vector2(-369, -189)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_jnoj3")
+skeleton = NodePath("../..")
+polygon = PackedVector2Array(681.372, 80.5835, 634.581, 114.377, 626.783, 179.364, 633.281, 270.346, 667.075, 350.93, 726.863, 423.715, 815.245, 428.914, 846.439, 349.63, 832.142, 296.341, 839.94, 210.558, 808.746, 103.979)
+uv = PackedVector2Array(681.372, 80.5835, 634.581, 114.377, 626.783, 179.364, 633.281, 270.346, 667.075, 350.93, 726.863, 423.715, 815.245, 428.914, 846.439, 349.63, 832.142, 296.341, 839.94, 210.558, 808.746, 103.979)
+
+[node name="LeftLeg" type="Bone2D" parent="Skeleton2D/Body"]
+position = Vector2(23, -4)
+rotation = 2.66547
+scale = Vector2(1, 1)
+rest = Transform2D(-0.888778, 0.458337, -0.458337, -0.888778, 23, -4)
+auto_calculate_length_and_angle = false
+length = 125.0
+bone_angle = -63.1175
+
+[node name="LeftLeg" type="Polygon2D" parent="Skeleton2D/Body/LeftLeg"]
+position = Vector2(264.087, 484.981)
+rotation = -2.66547
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_jnoj3")
+skeleton = NodePath("../../..")
+polygon = PackedVector2Array(911.426, 553.689, 851.638, 621.276, 856.837, 718.757, 889.33, 839.633, 830.842, 844.832, 798.349, 883.824, 817.845, 925.416, 847.739, 952.71, 964.715, 935.813, 1001.11, 889.023, 990.71, 865.627, 985.511, 723.956, 985.511, 600.48)
+uv = PackedVector2Array(911.426, 553.689, 851.638, 621.276, 856.837, 718.757, 889.33, 839.633, 830.842, 844.832, 798.349, 883.824, 817.845, 925.416, 847.739, 952.71, 964.715, 935.813, 1001.11, 889.023, 990.71, 865.627, 985.511, 723.956, 985.511, 600.48)
+
+[node name="Arms" type="Bone2D" parent="Skeleton2D/Body"]
+position = Vector2(-28, -118)
+rest = Transform2D(1, 0, 0, 1, -28, -118)
+
+[node name="RightArm" type="Bone2D" parent="Skeleton2D/Body/Arms"]
+z_index = -1
+position = Vector2(-19, 4)
+rotation = 0.351082
+rest = Transform2D(0.939001, 0.343914, -0.343914, 0.939001, -19, 4)
+
+[node name="RightArm" type="Polygon2D" parent="Skeleton2D/Body/Arms/RightArm"]
+position = Vector2(-186.19, -156.207)
+rotation = -0.390191
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_jnoj3")
+polygon = PackedVector2Array(282.533, 378.572, 184.882, 418.609, 169.258, 504.542, 183.905, 541.65, 159.492, 656.879, 135.08, 715.469, 73.5591, 787.732, 132.15, 863.9, 202.459, 895.148, 266.909, 913.702, 263.003, 853.158, 292.298, 817.027, 304.993, 719.375, 262.026, 710.587, 293.275, 590.476, 327.453, 457.669)
+uv = PackedVector2Array(282.533, 378.572, 184.882, 418.609, 169.258, 504.542, 183.905, 541.65, 159.492, 656.879, 135.08, 715.469, 73.5591, 787.732, 132.15, 863.9, 202.459, 895.148, 266.909, 913.702, 263.003, 853.158, 292.298, 817.027, 304.993, 719.375, 262.026, 710.587, 293.275, 590.476, 327.453, 457.669)
+bones = ["Body", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Arms", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Arms/RightArm", PackedFloat32Array(0.5, 0.5, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0), "Body/Arms/LeftArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RightLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LeftLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Head" type="Bone2D" parent="Skeleton2D/Body/Arms"]
+position = Vector2(-2, -28)
+rotation = 3.06135
+rest = Transform2D(-0.996783, 0.0801517, -0.0801517, -0.996783, -2, -28)
+auto_calculate_length_and_angle = false
+length = 40.0
+bone_angle = 0.0
+
+[node name="Head" type="Polygon2D" parent="Skeleton2D/Body/Arms/Head"]
+position = Vector2(196.315, 141.189)
+rotation = -3.06135
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_jnoj3")
+skeleton = NodePath("../../../..")
+polygon = PackedVector2Array(339.54, 72.7851, 294.049, 120.876, 295.348, 176.764, 301.847, 236.553, 321.343, 311.938, 411.025, 331.434, 474.713, 283.343, 516.305, 171.565, 487.71, 75.3846, 403.227, 49.3897)
+uv = PackedVector2Array(339.54, 72.7851, 294.049, 120.876, 295.348, 176.764, 301.847, 236.553, 321.343, 311.938, 411.025, 331.434, 474.713, 283.343, 516.305, 171.565, 487.71, 75.3846, 403.227, 49.3897)
+
+[node name="LeftArm" type="Bone2D" parent="Skeleton2D/Body/Arms"]
+position = Vector2(21, 0)
+rotation = 0.108758
+rest = Transform2D(0.994092, 0.108544, -0.108544, 0.994092, 21, 0)
+auto_calculate_length_and_angle = false
+length = 150.0
+bone_angle = 87.0654
+
+[node name="LeftArm" type="Polygon2D" parent="Skeleton2D/Body/Arms/LeftArm"]
+position = Vector2(-254.737, -199.113)
+rotation = -0.154762
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_jnoj3")
+skeleton = NodePath("../../../..")
+polygon = PackedVector2Array(420.124, 419.816, 369.434, 470.506, 365.535, 551.09, 369.434, 580.984, 360.336, 640.772, 357.736, 684.963, 369.434, 710.958, 362.935, 748.651, 317.444, 765.547, 292.749, 801.94, 286.25, 838.333, 338.24, 813.638, 290.15, 918.917, 326.542, 926.715, 374.633, 916.317, 444.819, 904.62, 494.209, 861.728, 507.206, 829.235, 468.214, 782.444, 452.617, 723.956, 486.41, 678.465, 482.511, 616.077, 473.413, 593.981, 502, 582, 525.403, 564.087, 524.103, 478.304)
+uv = PackedVector2Array(420.124, 419.816, 369.434, 470.506, 365.535, 551.09, 369.434, 580.984, 360.336, 640.772, 357.736, 684.963, 369.434, 710.958, 362.935, 748.651, 317.444, 765.547, 292.749, 801.94, 286.25, 838.333, 338.24, 813.638, 290.15, 918.917, 326.542, 926.715, 374.633, 916.317, 444.819, 904.62, 494.209, 861.728, 507.206, 829.235, 468.214, 782.444, 452.617, 723.956, 486.41, 678.465, 482.511, 616.077, 473.413, 593.981, 525.403, 564.087, 524.103, 478.304)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xedwu")
@@ -25,6 +159,11 @@ shape = SubResource("RectangleShape2D_xedwu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeeArea"]
 position = Vector2(0, -75)
 shape = SubResource("RectangleShape2D_kdsj7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ru3s8")
+}
 
 [connection signal="body_entered" from="SeeArea" to="." method="_on_see_area_body_entered"]
 [connection signal="body_exited" from="SeeArea" to="." method="_on_see_area_body_exited"]

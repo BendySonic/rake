@@ -6,7 +6,7 @@ enum RakeState {SLEEP, NORMAL, CHASE}
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity = 0
 
 @export var see_area: Area2D
 
