@@ -4,6 +4,8 @@ extends Node2D
 @export_category("Player-Camera")
 @export var player: Player
 @export var camera: Camera2D
+@export_category("Interface")
+@export var camera_ui: CanvasLayer
 @export_category("Parallax")
 @export var background: Node2D
 @export var mountains: Parallax2D
@@ -18,6 +20,7 @@ func _ready() -> void:
 	
 	if night_mode:
 		player.set_night_mode()
+		camera_ui.set_night_mode()
 		set_night_mode()
 
 func _physics_process(delta: float) -> void:
@@ -31,6 +34,7 @@ func _on_player_ended_run():
 
 func set_night_mode():
 	background.hide()
-	mountains.modulate = Color(1, 1, 1, 0.4)
+	mountains.modulate = Color(1, 1, 1, 0.45)
 	wires.modulate = Color(1, 1, 1, 0.1)
 	background_snow.modulate = Color(1, 1, 1, 0.6)
+	pass

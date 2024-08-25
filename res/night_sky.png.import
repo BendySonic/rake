@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/night_sky.png-01bc456e998ed1c6338b1415238fe35
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

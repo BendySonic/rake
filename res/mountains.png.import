@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/mountains.png-97ca1ad989b50bae52fcfa1594a48fb
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

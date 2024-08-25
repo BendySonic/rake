@@ -9,6 +9,7 @@ const RUN_SPEED = 350.0
 const JUMP_VELOCITY = -400.0
 
 @export var night: Node2D
+@export var flashnight: PointLight2D
 
 var speed = 225.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -18,14 +19,12 @@ var is_run := false
 
 func _physics_process(delta: float) -> void:
 	move(delta)
+	point_flashnight()
 
 func move(delta: float) -> void:
 	# Move
 	var direction = Input.get_vector("left", "right", "forward", "back")
-	if direction:
-		velocity = direction * speed
-	else:
-		velocity = velocity.move_toward(Vector2(0, 0), speed)
+	velocity = direction * speed
 	# Run
 	if Input.is_action_just_pressed("run"):
 		is_run = true
@@ -40,3 +39,6 @@ func move(delta: float) -> void:
 
 func set_night_mode():
 	night.show()
+
+func point_flashnight():
+	flashnight.look_at(get_global_mouse_position())

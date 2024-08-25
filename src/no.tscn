@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4x8jnuk588"]
+
+[ext_resource type="Script" path="res://src/game/debug.gd" id="1_l0bk5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y0fag"]
+font_size = 50
+font_color = Color(0.404511, 0.404511, 0.404511, 1)
+
+[node name="No" type="Node2D"]
+
+[node name="Debug" type="CanvasLayer" parent="." node_paths=PackedStringArray("fps_label")]
+script = ExtResource("1_l0bk5")
+fps_label = NodePath("Control/MarginContainer/FPS")
+
+[node name="Control" type="Control" parent="Debug"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Debug/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="FPS" type="Label" parent="Debug/Control/MarginContainer"]
+layout_mode = 2
+text = "FPS: 60"
+label_settings = SubResource("LabelSettings_y0fag")

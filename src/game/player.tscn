@@ -7,9 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xedwu"]
 size = Vector2(50, 20)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("night")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("night", "flashnight")]
 script = ExtResource("1_8lic6")
 night = NodePath("Night")
+flashnight = NodePath("Night/Flashnight")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 1)
@@ -23,8 +24,11 @@ shape = SubResource("RectangleShape2D_xedwu")
 visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Night"]
-color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+color = Color(0.0605303, 0.0605304, 0.0605303, 1)
 
-[node name="PointLight2D" type="PointLight2D" parent="Night"]
-position = Vector2(449, 13)
+[node name="Flashnight" type="PointLight2D" parent="Night"]
+position = Vector2(1, -2)
+scale = Vector2(0.8, 0.8)
+energy = 0.75
 texture = ExtResource("3_nhj7o")
+offset = Vector2(448, 15)

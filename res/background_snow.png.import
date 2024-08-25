@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/background_snow.png-db9f5c747438c81f10a8d3ec4
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

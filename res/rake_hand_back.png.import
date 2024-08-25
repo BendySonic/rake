@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl1rnbyoptx2c"
-path="res://.godot/imported/flashnight.png-5e765b49b8f5a2a9078e805a81dc40d9.ctex"
+uid="uid://ko5psq8pmcj2"
+path="res://.godot/imported/rake_hand_back.png-b194387483a4129ed6eb456a892bcf5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/flashnight.png"
-dest_files=["res://.godot/imported/flashnight.png-5e765b49b8f5a2a9078e805a81dc40d9.ctex"]
+source_file="res://res/rake_hand_back.png"
+dest_files=["res://.godot/imported/rake_hand_back.png-b194387483a4129ed6eb456a892bcf5b.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

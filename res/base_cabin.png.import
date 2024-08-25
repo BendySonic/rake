@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/base_cabin.png-04ecbca0ba23f49711080d3e438fb1
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

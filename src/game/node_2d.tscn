@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b4lklevqsj0vk"]
+[gd_scene load_steps=32 format=3 uid="uid://b4lklevqsj0vk"]
 
 [ext_resource type="Script" path="res://src/game/node_2d.gd" id="1_2w2eo"]
 [ext_resource type="PackedScene" uid="uid://d0ruxxa8ys1wg" path="res://src/game/player.tscn" id="1_qium4"]
@@ -14,8 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://b2e64fm3vs0fq" path="res://res/shadow.png" id="8_upkra"]
 [ext_resource type="Texture2D" uid="uid://c4fxeh2sskrhi" path="res://res/base_cabin.png" id="9_818pv"]
 [ext_resource type="Texture2D" uid="uid://bcjtrbk7px6q2" path="res://res/foreground_snow.png" id="10_i3x10"]
-[ext_resource type="Shader" path="res://addons/GodotRetro/Screen Shaders/LensDistortion.gdshader" id="14_1121j"]
+[ext_resource type="Texture2D" uid="uid://bl1rnbyoptx2c" path="res://res/flashnight.png" id="13_lsxaa"]
+[ext_resource type="Texture2D" uid="uid://w8h1rrtqu0dc" path="res://res/window_light.png" id="14_ddv1k"]
 [ext_resource type="Texture2D" uid="uid://bffw3tolf483m" path="res://res/camera_hud.png" id="15_kk6iy"]
+[ext_resource type="Texture2D" uid="uid://dcnpkx3ocrryl" path="res://res/window_light_2.png" id="15_y6br3"]
+[ext_resource type="Shader" path="res://addons/GodotRetro/Screen Shaders/LensDistortion.gdshader" id="16_2yois"]
+[ext_resource type="Script" path="res://src/game/debug.gd" id="16_r17rx"]
+[ext_resource type="Script" path="res://src/game/camera.gd" id="18_wd8sq"]
+[ext_resource type="Texture2D" uid="uid://dl1ctiv8lsb4n" path="res://res/white_camera_hud.png" id="20_fgwbs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c0ays"]
 size = Vector2(6000, 128)
@@ -38,14 +44,19 @@ size = Vector2(170, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5oxxa"]
 size = Vector2(60, 128)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gevq"]
-shader = ExtResource("14_1121j")
-shader_parameter/strength = 0.015
+[sub_resource type="LabelSettings" id="LabelSettings_yp21h"]
+font_size = 50
+font_color = Color(0.404511, 0.404511, 0.404511, 1)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "camera", "background", "mountains", "wires", "background_snow")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4wq7"]
+shader = ExtResource("16_2yois")
+shader_parameter/strength = 0.02
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "camera", "camera_ui", "background", "mountains", "wires", "background_snow")]
 script = ExtResource("1_2w2eo")
 player = NodePath("Objects/Player")
 camera = NodePath("Objects/Camera2D")
+camera_ui = NodePath("Camera")
 background = NodePath("Parallax/Background")
 mountains = NodePath("Parallax/Mountains")
 wires = NodePath("Parallax/Wires")
@@ -85,6 +96,7 @@ scroll_scale = Vector2(0.2, 0)
 scroll_offset = Vector2(-385, -39)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/Mountains"]
+light_mask = 2
 texture = ExtResource("3_5akix")
 centered = false
 
@@ -93,6 +105,7 @@ scroll_scale = Vector2(0.5, 0)
 scroll_offset = Vector2(253, 274)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/Wires"]
+light_mask = 2
 position = Vector2(-138, -98)
 texture = ExtResource("4_58j2b")
 centered = false
@@ -102,6 +115,7 @@ scroll_scale = Vector2(0.6, 0)
 scroll_offset = Vector2(-2556, 347)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/BackgroundSnow"]
+light_mask = 2
 texture = ExtResource("5_vymyd")
 centered = false
 
@@ -140,12 +154,55 @@ position = Vector2(1485, -458)
 texture = ExtResource("9_818pv")
 centered = false
 
+[node name="Flashnight" type="PointLight2D" parent="Parallax/Main"]
+position = Vector2(3837, -273)
+rotation = 1.5708
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_lsxaa")
+offset = Vector2(448, 15)
+
+[node name="Flashnight2" type="PointLight2D" parent="Parallax/Main"]
+position = Vector2(1560, -327)
+rotation = 1.53124
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_lsxaa")
+offset = Vector2(448, 15)
+
+[node name="WindowLight" type="Node2D" parent="Parallax/Main"]
+position = Vector2(3297, -33)
+
+[node name="PointLight2D" type="PointLight2D" parent="Parallax/Main/WindowLight"]
+position = Vector2(-1.99976, -1)
+scale = Vector2(1.7, 1.7)
+energy = 2.0
+texture = ExtResource("14_ddv1k")
+
+[node name="WindowLight2" type="Sprite2D" parent="Parallax/Main/WindowLight"]
+position = Vector2(0, -1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("15_y6br3")
+
+[node name="WindowLight2" type="Node2D" parent="Parallax/Main"]
+modulate = Color(1, 1, 1, 0.552941)
+position = Vector2(3634, -33)
+
+[node name="PointLight2D" type="PointLight2D" parent="Parallax/Main/WindowLight2"]
+position = Vector2(-1.99976, -1)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("14_ddv1k")
+
+[node name="WindowLight2" type="Sprite2D" parent="Parallax/Main/WindowLight2"]
+position = Vector2(0, -1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("15_y6br3")
+
 [node name="ForegroundSnow" type="Parallax2D" parent="Parallax"]
 z_index = 2
 scroll_scale = Vector2(1.5, 0)
 scroll_offset = Vector2(-1983, 904)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/ForegroundSnow"]
+light_mask = 2
 position = Vector2(15, -5)
 texture = ExtResource("10_i3x10")
 centered = false
@@ -207,9 +264,12 @@ limit_right = 2000
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Camera" type="CanvasLayer" parent="." node_paths=PackedStringArray("dark_hud", "white_hud")]
+script = ExtResource("18_wd8sq")
+dark_hud = NodePath("Control/DarkCameraHud")
+white_hud = NodePath("Control/WhiteCameraHud2")
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="Camera"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,7 +278,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+[node name="DarkCameraHud" type="TextureRect" parent="Camera/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -227,20 +287,59 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_kk6iy")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 4
-
-[node name="Control" type="Control" parent="CanvasLayer2"]
+[node name="WhiteCameraHud2" type="TextureRect" parent="Camera/Control"]
 visible = false
+modulate = Color(1, 1, 1, 0.105882)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_fgwbs")
+
+[node name="Debug" type="CanvasLayer" parent="." node_paths=PackedStringArray("fps_label")]
+script = ExtResource("16_r17rx")
+fps_label = NodePath("Control/MarginContainer/FPS")
+
+[node name="Control" type="Control" parent="Debug"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect2" type="ColorRect" parent="CanvasLayer2/Control"]
-material = SubResource("ShaderMaterial_2gevq")
+[node name="MarginContainer" type="MarginContainer" parent="Debug/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="FPS" type="Label" parent="Debug/Control/MarginContainer"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 2
+text = "FPS: 60"
+label_settings = SubResource("LabelSettings_yp21h")
+
+[node name="Shader" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="Shader"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="ColorRect" parent="Shader/Control"]
+material = SubResource("ShaderMaterial_t4wq7")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
