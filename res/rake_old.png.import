@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dio386v8hqayn"
-path="res://.godot/imported/rake_leg_back.png-c81373dfb3a79b1207ed6eab411767ab.ctex"
+uid="uid://dy03objpfjq4l"
+path="res://.godot/imported/rake_old.png-c1907435849bd8c3ea6aaa3a45328e8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/rake_leg_back.png"
-dest_files=["res://.godot/imported/rake_leg_back.png-c81373dfb3a79b1207ed6eab411767ab.ctex"]
+source_file="res://res/rake_old.png"
+dest_files=["res://.godot/imported/rake_old.png-c1907435849bd8c3ea6aaa3a45328e8a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ko5psq8pmcj2"
-path="res://.godot/imported/rake_hand_back.png-b194387483a4129ed6eb456a892bcf5b.ctex"
+uid="uid://b7qw20tdptbkp"
+path="res://.godot/imported/leshy_new.png-4bf604779c958c1605faf8c8c9c8d8d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/rake_hand_back.png"
-dest_files=["res://.godot/imported/rake_hand_back.png-b194387483a4129ed6eb456a892bcf5b.ctex"]
+source_file="res://res/leshy_new.png"
+dest_files=["res://.godot/imported/leshy_new.png-4bf604779c958c1605faf8c8c9c8d8d5.ctex"]
 
 [params]
 

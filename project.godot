@@ -8,6 +8,10 @@
 
 config_version=5
 
+[animation]
+
+warnings/check_invalid_track_paths=false
+
 [application]
 
 config/name="Rake 2D"
@@ -62,8 +66,16 @@ run={
 [physics]
 
 2d/run_on_separate_thread=true
+common/physics_ticks_per_second=30
+2d/time_before_sleep=0.1
+2d/solver/solver_iterations=1
+common/physics_interpolation=true
 
 [rendering]
 
+occlusion_culling/bvh_build_quality=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/shadow_atlas/size=1024
+lights_and_shadows/tighter_shadow_caster_culling=false
+occlusion_culling/use_occlusion_culling=true

@@ -268,9 +268,9 @@ limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="Leshy" parent="Objects" node_paths=PackedStringArray("player") instance=ExtResource("16_qp23q")]
-position = Vector2(1123, 930)
+position = Vector2(923, 930)
 player = NodePath("../Player")
-default_scale = Vector2(0.65, 0.65)
+default_scale = Vector2(0.7, 0.7)
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("dark_hud", "white_hud")]
 script = ExtResource("18_wd8sq")
